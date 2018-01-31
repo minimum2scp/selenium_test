@@ -17,15 +17,17 @@ pipeline {
           rbenv version
           gem env
         '''
-        sh '''
-          #!/bin/bash
-          set +ex
-          . /etc/profile.d/rbenv.sh
-          . /etc/profile.d/firefox.sh
-          set -ex
-          bundle check || bundle install --path=vendor/bundle --jobs=4
-          bundle exec rspec spec/features/*.feature
-        '''
+        wrap([$class: 'Xvfb', additionalOptions: '', assignedLabels: '', displayNameOffset: 0, screen: '']) {
+          sh '''
+            #!/bin/bash
+            set +ex
+            . /etc/profile.d/rbenv.sh
+            . /etc/profile.d/firefox.sh
+            set -ex
+            bundle check || bundle install --path=vendor/bundle --jobs=4
+            bundle exec rspec spec/features/*.feature
+          '''
+        }
       }
     }
   }
