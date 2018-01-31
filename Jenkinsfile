@@ -25,7 +25,7 @@ pipeline {
           . /etc/profile.d/firefox.sh
           set -ex
           bundle check || bundle install --path=vendor/bundle --jobs=4
-          xvfb-run bundle exec rspec spec/features/*.feature
+          bundle exec rspec spec/features/*.feature
         '''
         }
       }
