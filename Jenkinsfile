@@ -21,6 +21,7 @@ pipeline {
           #!/bin/bash
           set +ex
           . /etc/profile.d/rbenv.sh
+          . /etc/profile.d/firefox.sh
           set -ex
           bundle check || bundle install --path=vendor/bundle --jobs=4
           bundle exec rspec spec/features/*.feature
