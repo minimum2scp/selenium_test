@@ -6,17 +6,18 @@ pipeline {
         node {
           label 'ci-slave'
         }
-        
       }
       steps {
         sh '''
+          #! /bin/bash -l
           export -p
-          bash -lc 'rbenv version'
-          bash -lc 'gem env'
+          rbenv version
+          gem env
         '''
         sh '''
-          bash -lc 'bundle check || bundle install --path=vendor/bundle --jobs=4'
-          bash -lc 'bundle exec rspec spec/reatures/*.feature'
+          #!/bin/bash -l
+          bundle check || bundle install --path=vendor/bundle --jobs=4
+          bundle exec rspec spec/reatures/*.feature
         '''
       }
     }
