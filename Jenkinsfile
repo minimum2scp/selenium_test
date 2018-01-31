@@ -23,7 +23,7 @@ pipeline {
           . /etc/profile.d/rbenv.sh
           set -ex
           bundle check || bundle install --path=vendor/bundle --jobs=4
-          bundle exec rspec spec/reatures/*.feature
+          bundle exec rspec spec/features/*.feature
         '''
       }
     }
