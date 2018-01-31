@@ -9,14 +9,18 @@ pipeline {
         
       }
       steps {
-        sh '''export -p
-rbenv version
-gem env
-'''
-        sh '''bundle check || bundle install --path=vendor/bundle --jobs=4
-bundle exec rspec spec/reatures/*.feature
-'''
+        sh '''
+          export -p
+          rbenv version
+          gem env
+        '''
+        sh '''
+          bundle check || bundle install --path=vendor/bundle --jobs=4
+          bundle exec rspec spec/reatures/*.feature
+        '''
       }
     }
   }
 }
+
+/* vim:set ft=groovy: */
