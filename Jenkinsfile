@@ -9,7 +9,7 @@ pipeline {
       }
       steps {
         sh '''\
-        #! /bin/bash -l
+        #!/bin/bash -l
         export -p
         rbenv version
         gem env
