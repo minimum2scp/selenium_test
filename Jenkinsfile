@@ -17,7 +17,7 @@ pipeline {
           rbenv version
           gem env
         '''
-        wrap([$class: 'Xvfb', additionalOptions: '', assignedLabels: '', autoDisplayName: true, displayNameOffset: 0, screen: '']) {
+        wrap([$class: 'Xvfb', autoDisplayName: true]) {
           sh '''
             #!/bin/bash
             set +ex
