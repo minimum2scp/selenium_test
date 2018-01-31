@@ -17,6 +17,7 @@ pipeline {
           rbenv version
           gem env
         '''
+        wrap([$class: 'Xvfb', additionalOptions: '', assignedLabels: '', displayNameOffset: 0, installationName: 'default', screen: '']) {
         sh '''
           #!/bin/bash
           set +ex
@@ -26,6 +27,7 @@ pipeline {
           bundle check || bundle install --path=vendor/bundle --jobs=4
           xvfb-run bundle exec rspec spec/features/*.feature
         '''
+        }
       }
     }
   }
