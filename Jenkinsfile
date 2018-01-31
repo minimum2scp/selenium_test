@@ -11,12 +11,12 @@ pipeline {
       steps {
         sh '''
           export -p
-          rbenv version
-          gem env
+          bash -lc 'rbenv version'
+          bash -lc 'gem env'
         '''
         sh '''
-          bundle check || bundle install --path=vendor/bundle --jobs=4
-          bundle exec rspec spec/reatures/*.feature
+          bash -lc 'bundle check || bundle install --path=vendor/bundle --jobs=4'
+          bash -lc 'bundle exec rspec spec/reatures/*.feature'
         '''
       }
     }
