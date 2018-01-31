@@ -8,11 +8,7 @@ pipeline {
         }
       }
       steps {
-        sh '''
-          #! /bin/bash
-          set +ex
-          . /etc/profile.d/rbenv.sh
-          set -ex
+        sh '''#! /bin/bash -l
           export -p
           rbenv version
           gem env
