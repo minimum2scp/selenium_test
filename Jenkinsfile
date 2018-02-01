@@ -9,17 +9,17 @@ pipeline {
       }
       steps {
         sh '''\
-        #!/bin/bash -l
-        export -p
-        rbenv version
-        gem env
-        '''
+          #!/bin/bash -l
+          export -p
+          rbenv version
+          gem env
+        '''.stripIndent()
         wrap([$class: 'Xvfb', autoDisplayName: true]) {
           sh '''\
-          #!/bin/bash -l
-          bundle check || bundle install --path=vendor/bundle --jobs=4
-          bundle exec rspec spec/features/*.feature
-          '''
+            #!/bin/bash -l
+            bundle check || bundle install --path=vendor/bundle --jobs=4
+            bundle exec rspec spec/features/*.feature
+          '''.stripIndent()
         }
       }
     }
