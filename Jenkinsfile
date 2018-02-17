@@ -1,23 +1,24 @@
 pipeline {
-  agent any
+  agent none
   stages {
     stage('build') {
-      agent {
-        node {
-          label 'ci-slave'
-        }
-      }
+      agent { label 'ci-slave' }
       steps {
         sh '''#!/bin/bash -l
-              export -p
-              rbenv version
-              gem env
-           '''
+          set -xe
+          export -p
+          rbenv version
+          gem env
+        '''
+        sh '''#!/bin/bash -l
+          set -xe
+          bundle check || bundle install --jobs=4 --path=vendor/bundle --deployment
+        '''
         wrap([$class: 'Xvfb', autoDisplayName: true]) {
           sh '''#!/bin/bash -l
-                bundle check || bundle install --path=vendor/bundle --jobs=4
-                bundle exec rspec spec/features/*.feature
-             '''
+            set -xe
+            bundle exec rspec spec/features/*.feature
+          '''
         }
       }
     }
