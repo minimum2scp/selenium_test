@@ -30,5 +30,13 @@ RSpec.configure do |config|
   if !rspec_queue? && use_turnip_formatter?
     config.add_formatter ::RSpecTurnipFormatter, 'tmp/turnip_formatter/report.html'
   end
+
+  config.before do
+    @after_steps = []
+  end
+
+  config.after do
+    @after_steps.reverse.each(&:call)
+  end
 end
 

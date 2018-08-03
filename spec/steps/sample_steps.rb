@@ -20,3 +20,8 @@ step ":button ボタンが表示されていること" do |button|
   expect(button_list.any?{|b| b.text == button}).to be_truthy
 end
 
+step "あとでxxxを消す" do
+  @after_steps << ->(){
+    xxx.delete
+  }
+end
